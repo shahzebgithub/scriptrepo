@@ -1,0 +1,18 @@
+This script is for discovery scanning through Nmap. It ask you file name for saving Nmap output, then it'll filter only the hosts that're up and will require you a filename again for saving only filtered Nmap output that contains only Host IP that are up!
+
+
+
+#!/bin/bash
+echo "Enter filename to save Nmap output:"
+read FNvar
+touch $FNvar
+echo " "
+echo "Enter subnet to Scan: "
+read IPvar
+nmap -sn -oG $FNvar $IPvar
+echo " "
+echo "Enter a new filename to save output :"
+read FNvar1
+cat $FNvar | grep "Host" | cut -d ' ' -f 2 > $FNvar1
+echo "Your scanned output is saved into the file" $FNvar1
+rm $FNvar
